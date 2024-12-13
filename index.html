@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unban Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+        .title {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.5rem;
+        }
+        .countdown {
+            margin-top: 10px;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="title">King</div>
+        <div class="subtitle">Gets unbanned on: April 4, 2025</div>
+        <div class="countdown" id="countdown-king"></div>
+    </div>
+    <div class="section">
+        <div class="title">Cam</div>
+        <div class="subtitle">Gets unbanned on: April 11, 2025</div>
+        <div class="countdown" id="countdown-cam"></div>
+    </div>
+
+    <script>
+        function calculateCountdown(targetDate, elementId) {
+            const target = new Date(targetDate).getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = target - now;
+
+                if (distance < 0) {
+                    document.getElementById(elementId).innerText = "Already Unbanned!";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById(elementId).innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+
+        calculateCountdown('April 4, 2025', 'countdown-king');
+        calculateCountdown('April 11, 2025', 'countdown-cam');
+    </script>
+</body>
+</html>
